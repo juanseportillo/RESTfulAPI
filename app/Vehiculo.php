@@ -6,6 +6,10 @@ class Vehiculo extends Model{
 
 	protected $table = 'vehiculos';
 	protected $primarykEY = 'serie';
-	protected $fillable = array('color', 'clindraje', 'potencia', 'peso');
+	protected $fillable = array('color', 'clindraje', 'potencia', 'peso', 'fabricante_id');
+
+	public function fabricante(){
+		$his->belongsTo('Fabricante');
+	}
 
 }
