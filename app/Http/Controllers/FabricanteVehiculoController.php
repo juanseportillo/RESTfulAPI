@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class VehiculoController extends Controller
+use App\Fabricante;
+use App\Vehiculo;
+
+class FabricanteVehiculoController extends Controller
 {
 
     /**
@@ -15,9 +18,8 @@ class VehiculoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showAll(){
-        return 'mostrando todos los vehiculos';
-    }
+
+
     public function index($id)
     {
         return 'Mostrando todos los vehiculos del fabricante con id ' . $id;

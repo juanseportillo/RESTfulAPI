@@ -5,11 +5,13 @@ use Illuminate\Database\Eloquent\Model;
 class Vehiculo extends Model{
 
 	protected $table = 'vehiculos';
-	protected $primarykEY = 'serie';
+	protected $primaryKey = 'serie';
 	protected $fillable = array('color', 'clindraje', 'potencia', 'peso', 'fabricante_id');
 
+	protected $hidden = ['created_at', 'updated_at'];
+
 	public function fabricante(){
-		$his->belongsTo('Fabricante');
+		$this->belongsTo('Fabricante');
 	}
 
 }

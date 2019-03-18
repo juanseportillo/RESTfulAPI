@@ -11,10 +11,8 @@
 |
 */
 
-<<<<<<< HEAD
-Route::get('/', 'VehiculoController@showAll');asdas
+
+Route::resource('vehiculos','VehiculoController', ['only' => ['index','show']]);
 Route::resource('fabricantes','FabricanteController');
-Route::resource('fabricantes.vehiculos','VehiculoController');
-=======
-Route::get('/', 'MyController@index');
->>>>>>> parent of 0d80220... Se crean las primeras rutas y controladores
+Route::resource('fabricantes.vehiculos','FabricanteVehiculoController',['except' => ['show']]);
+
