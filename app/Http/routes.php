@@ -11,6 +11,6 @@
 |
 */
 
-Route::resource('vehiculos','VehiculoController', ['only'=> ['index','show']]);
+Route::get('/', 'VehiculoController@showAll');asdas
 Route::resource('fabricantes','FabricanteController');
-Route::resource('fabricantes.vehiculos','FabricanteVehiculoController', ['except'=>['show']]);
+Route::resource('fabricantes.vehiculos','VehiculoController');
