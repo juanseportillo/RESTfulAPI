@@ -11,6 +11,10 @@ use App\Fabricante;
 
 class FabricanteController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth.basic', ['only' => ['store', 'update', 'destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,16 +27,6 @@ class FabricanteController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return 'mostrando formulario para crear un fabricante';
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -40,7 +34,14 @@ class FabricanteController extends Controller
      */
     public function store(Request $request)
     {
-        return 'recibiendo';
+        if (!$request->input('nombre') || ! $request->input('telefono')) {
+            
+            return response()->json(['mensaje' => 'No se pudieron procesar los valores','codigo' => 422], 422);
+        }
+
+        Fabricante::create($request->all());
+
+        return response()->json(['mensaje' => 'Fabricante insertado'], 201);
     }
 
     /**
@@ -60,16 +61,6 @@ class FabricanteController extends Controller
         return response()->json(['datos' => $fabricante], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        return 'Mostrando el formulario para editar el fabricate con id ' .$id;
-    }
 
     /**
      * Update the specified resource in storage.
