@@ -13,7 +13,7 @@ use App\Vehiculo;
 class FabricanteVehiculoController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth.basic', ['on ly' => ['store', 'update', 'destroy']]);
+        $this->middleware('auth.basic.once', ['on ly' => ['store', 'update', 'destroy']]);
     }
 
 
@@ -33,16 +33,6 @@ class FabricanteVehiculoController extends Controller
         }
 
         return response()->json(['datos' => $fabricante->vehiculos], 200);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($id)
-    {
-        return 'mostrando formulario para agregar vehiculo al fabricante ' .$id;
     }
 
     /**
@@ -74,28 +64,6 @@ class FabricanteVehiculoController extends Controller
 
         return response()->json(['mensaje' => 'Vehiculo insertado'],201);
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($idFabricante, $idVehiculo)
-    {
-        return 'Mostrando vehiculo ' . $idVehiculo . ' del fabricante con id ' . $idFabricante;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($idFabricante, $idVehiculo)
-    {
-        return "Mostrando formulario para editar el vehiculo $idVehiculo del fabricante $idFabricante";
     }
 
     /**
