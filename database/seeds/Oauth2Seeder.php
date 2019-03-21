@@ -1,8 +1,8 @@
 <?php
 use Illuminate\Database\Seeder;
-use App\Fabricante;
 use Faker\Factory as Faker;
-class FabricanteSeeder extends Seeder 
+
+class Oauth2Seeder extends Seeder 
 {
 	/**
 	 * Run the database seeds.
@@ -11,13 +11,15 @@ class FabricanteSeeder extends Seeder
 	 */
 	public function run()
 	{
+
+		
 		$faker = Faker::create();
-		for($i = 0; $i < 100; $i++)
+		for($i = 1; $i < 10; $i++)
 		{
-			Fabricante::create
-			([
-				'nombre' => $faker->word(),
-				'telefono' => $faker->randomNumber(7)
+			DB::table('oauth_clients')->insert(
+			[	'id' => "id$i",
+				'secret' => "secret$i",
+				'name' => 'cliente$i',
 			]);
 		}
 	}

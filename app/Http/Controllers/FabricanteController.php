@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -12,7 +13,7 @@ use App\Fabricante;
 class FabricanteController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth.basic.once', ['only' => ['store', 'update', 'destroy']]);
+        $this->middleware('oauth', ['only' => ['store', 'update', 'destroy']]);
     }
 
     /**
@@ -20,10 +21,23 @@ class FabricanteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
+        $pagina = 1; //Valor predterminado
 
-        return response()->json(['datos' => Fabricante::all()], 200);
+        if($request->has('page'))
+
+        {
+
+        $pagina = $request->get('page');
+
+        }
+
+        $fabricantes = Cache::remember("fabricantes$pagina", 15/60, function (){
+            return Fabricante::simplePaginate(15);
+        });
+
+        return response()->json(['siguiente'=>$fabricantes->nextPageUrl(),'anterior' => $fabricantes->previousPageUrl(), 'datos' => $fabricantes->items()], 200);
     }
 
     /**

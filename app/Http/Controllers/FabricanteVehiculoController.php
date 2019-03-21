@@ -13,7 +13,7 @@ use App\Vehiculo;
 class FabricanteVehiculoController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth.basic.once', ['on ly' => ['store', 'update', 'destroy']]);
+        $this->middleware('oauth', ['only' => ['store', 'update', 'destroy']]);
     }
 
 
